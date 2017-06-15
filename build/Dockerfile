@@ -2,6 +2,10 @@ FROM ubuntu:16.04
 
 MAINTAINER Shane Husson version: 0.1
 
+ENV DEBIAN_FRONTEND noninteractive
+
+WORKDIR /build
+
 RUN sed -i -- \
     's/# deb-src/deb-src/g' \
     /etc/apt/sources.list && \
@@ -45,9 +49,12 @@ RUN sed -i -- \
       llvm \
       llvm-dev \
       maven \
-      zlib1g-dev
-
-WORKDIR /build
+      wget \
+      zlib1g-dev && \
+    curl -O -L http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb && \
+    dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb && \
+    apt-get update && \
+    apt-get install -y cuda
 
 RUN apt build-dep -y thrift-compiler && \
     VERS=0.10.0 && \
@@ -62,9 +69,8 @@ RUN apt build-dep -y thrift-compiler && \
         --prefix=/usr/local/mapd-deps && \
     make -j $(nproc) && \
     make install && \
-    cd ..
-
-RUN VERS=1.11.3 && \
+    cd .. && \
+    VERS=1.11.3 && \
     curl -O -L https://github.com/Blosc/c-blosc/archive/v$VERS.tar.gz && \
     tar xvf v$VERS.tar.gz && \
     BDIR="c-blosc-$VERS/build" && \
@@ -82,10 +88,8 @@ RUN VERS=1.11.3 && \
         .. && \
     make -j $(nproc) && \
     make install && \
-    cd ..
-
-
-RUN VERS=2017.04.10.00 && \
+    cd .. && \
+    VERS=2017.04.10.00 && \
     curl -O -L https://github.com/facebook/folly/archive/v$VERS.tar.gz && \
     tar xvf v$VERS.tar.gz && \
     cd folly-$VERS/folly && \
@@ -93,9 +97,8 @@ RUN VERS=2017.04.10.00 && \
     ./configure --prefix=/usr/local/mapd-deps && \
     make -j $(nproc) && \
     make install && \
-    cd ..
-
-RUN VERS=1.21-45 && \
+    cd .. && \
+    VERS=1.21-45 && \
     curl -O -L https://github.com/jarro2783/bisonpp/archive/$VERS.tar.gz && \
     tar xvf $VERS.tar.gz && \
     cd bisonpp-$VERS && \
@@ -104,22 +107,14 @@ RUN VERS=1.21-45 && \
     make install && \
     cd ..
 
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
-ENV LD_LIBRARY_PATH=/usr/lib/jvm/default-java/jre/lib/amd64/server:${LD_LIBRARY_PATH}
-ENV LD_LIBRARY_PATH=/usr/local/mapd-deps/lib:${LD_LIBRARY_PATH}
-ENV LD_LIBRARY_PATH=/usr/local/mapd-deps/lib64:${LD_LIBRARY_PATH}
-ENV PATH=/usr/local/cuda/bin:${PATH}
-ENV PATH=/usr/local/mapd-deps/bin:${PATH}
-ENV PATH=${PATH}:/build/mapd-core/build/bin
-
-## 2dad055
-## 21fc39 - stable
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/jvm/default-java/jre/lib/amd64/server:/usr/local/mapd-deps/lib:/usr/local/mapd-deps/lib64:${LD_LIBRARY_PATH} \
+    PATH=/usr/local/cuda/bin:/usr/local/mapd-deps/bin:/build/mapd-core/build/bin:${PATH}
 
 RUN cd /build && \
     git clone https://github.com/shusson/mapd-core.git && \
     cd mapd-core && \
-    git checkout 6cfd99a && \
+    git checkout 604126d && \
     mkdir -p /build/mapd-core/build && \
     cd /build/mapd-core/build && \
-    cmake -DCMAKE_BUILD_TYPE=debug -DENABLE_CUDA=off .. && \
+    cmake -DCMAKE_BUILD_TYPE=debug .. && \
     make -j $(nproc)
