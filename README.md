@@ -4,11 +4,11 @@
 Load data
 ```bash
 cd data
-dc up
+docker-compose up
 cd ..
 ```
 
 Start mapd servers and nginx load balancer
 ```bash
-dc up -d
+docker-compose up -d
 ```
