@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 MAINTAINER Shane Husson version: 0.1
 
@@ -50,11 +50,7 @@ RUN sed -i -- \
       llvm-dev \
       maven \
       wget \
-      zlib1g-dev && \
-    curl -O -L http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb && \
-    dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb && \
-    apt-get update && \
-    apt-get install -y cuda
+      zlib1g-dev
 
 RUN apt build-dep -y thrift-compiler && \
     VERS=0.10.0 && \
@@ -116,5 +112,5 @@ RUN cd /build && \
     git checkout 604126d && \
     mkdir -p /build/mapd-core/build && \
     cd /build/mapd-core/build && \
-    cmake -DCMAKE_BUILD_TYPE=debug .. && \
+    cmake -DCMAKE_BUILD_TYPE=debug -DCUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so .. && \
     make -j $(nproc)
