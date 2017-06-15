@@ -1,0 +1,7 @@
+version: '2'
+services:
+  load:
+    image: shusson/mapd-build:6cfd99a
+    entrypoint: ["/bin/bash", "/data/load.sh"]
+    volumes:
+      - ../data:/data

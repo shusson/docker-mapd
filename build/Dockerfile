@@ -104,23 +104,22 @@ RUN VERS=1.21-45 && \
     make install && \
     cd ..
 
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH \
-    LD_LIBRARY_PATH=/usr/lib/jvm/default-java/jre/lib/amd64/server:$LD_LIBRARY_PATH \
-    LD_LIBRARY_PATH=/usr/local/mapd-deps/lib:$LD_LIBRARY_PATH \
-    LD_LIBRARY_PATH=/usr/local/mapd-deps/lib64:$LD_LIBRARY_PATH \
-    PATH=/usr/local/cuda/bin:$PATH \
-    PATH=/usr/local/mapd-deps/bin:$PATH
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+ENV LD_LIBRARY_PATH=/usr/lib/jvm/default-java/jre/lib/amd64/server:${LD_LIBRARY_PATH}
+ENV LD_LIBRARY_PATH=/usr/local/mapd-deps/lib:${LD_LIBRARY_PATH}
+ENV LD_LIBRARY_PATH=/usr/local/mapd-deps/lib64:${LD_LIBRARY_PATH}
+ENV PATH=/usr/local/cuda/bin:${PATH}
+ENV PATH=/usr/local/mapd-deps/bin:${PATH}
+ENV PATH=${PATH}:/build/mapd-core/build/bin
 
 ## 2dad055
 ## 21fc39 - stable
 
 RUN cd /build && \
-    git clone https://github.com/mapd/mapd-core.git && \
+    git clone https://github.com/shusson/mapd-core.git && \
     cd mapd-core && \
-    git checkout 2dad055 && \
+    git checkout 6cfd99a && \
     mkdir -p /build/mapd-core/build && \
     cd /build/mapd-core/build && \
     cmake -DCMAKE_BUILD_TYPE=debug -DENABLE_CUDA=off .. && \
     make -j $(nproc)
-
-RUN apt install -y vim
