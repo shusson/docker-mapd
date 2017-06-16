@@ -21,6 +21,10 @@ curl -L -O https://github.com/docker/compose/releases/download/1.14.0-rc2/docker
 sudo mv docker-compose-`uname -s`-`uname -m` /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
+# install nvidia docker
+sudo apt install -y python-pip
+pip install nvidia-docker-compose
+
 # install nvidia drivers
 sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
