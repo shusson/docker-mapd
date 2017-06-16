@@ -1,11 +1,12 @@
-
-# setup docker
 sudo apt-get install -y \
       apt-transport-https \
       ca-certificates \
       curl \
-      software-properties-common
+      software-properties-common \
+      htop \
+      python-pip
 
+# setup docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo add-apt-repository \
@@ -21,8 +22,7 @@ curl -L -O https://github.com/docker/compose/releases/download/1.14.0-rc2/docker
 sudo mv docker-compose-`uname -s`-`uname -m` /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# install nvidia docker
-sudo apt install -y python-pip
+# install nvidia docker compose
 pip install nvidia-docker-compose
 
 # install nvidia drivers
