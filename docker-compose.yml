@@ -10,19 +10,19 @@ services:
       - mapd-00
       - mapd-01
   mapd-00:
-    image: shusson/mapd-build:604126d
+    image: ${MAPD_IMAGE}
     entrypoint: ["mapd_server", "--http-port", "9090", "-p", "9091", "--data", "/data/mapd-data-00", "--read-only"]
     volumes:
       - ./data:/data
   mapd-01:
-    image: shusson/mapd-build:604126d
+    image: ${MAPD_IMAGE}
     entrypoint: ["mapd_server", "--http-port", "9090", "-p", "9091", "--data", "/data/mapd-data-00", "--read-only"]
     volumes:
       - ./data:/data
     depends_on:
       - mapd-00
   immerse:
-    image: shusson/mapd-build:604126d
+    image: ${MAPD_IMAGE}
     entrypoint: ["mapd_web_server", "--port", "8080", "--backend-url", "http://x:80"]
     working_dir: /build/mapd-core/build
     depends_on:
