@@ -1,17 +1,8 @@
-## Containerized MapD configured for read only data
-
-We are using a [modified version](https://github.com/shusson/mapd-core/tree/readonly)
-of mapd-core in which session and data lock checks have been disabled in a brutal
-manner. Do not use in production until we have properly handled sessions and data
-locks.
-
-At the moment there is no node discovery, so the cluster size is hard coded
-in the `docker-compose.yml`. For example you can add more mapd servers by
-duplicating the `mapd-00` service in `docker-compose.yml`.
+## Containerized MapD
 
 ### Images
 There are images for CPU and GPU targets. Each image compiles and builds mapd
-from source.
+from source. When multi-stage builds become available we will split the images.
 
 AFAIK we cannot use the GPU image for CPU only targets because the GPU image
 only contains stubs for the CUDA libraries and mapd expects the real libraries
@@ -28,8 +19,8 @@ docker build . -t fred/mapd-cuda
 or use one of the pushed images that already exist which are tagged by the
 mapd-core hash.
 ```bash
-docker pull shusson/mapd-cuda:604126d
-docker pull shusson/mapd-cpu:604126d
+docker pull shusson/mapd-cuda:036112c
+docker pull shusson/mapd-cpu:036112c
 ```
 
 ### Usage

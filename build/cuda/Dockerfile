@@ -107,9 +107,9 @@ ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/jvm/default-java/jre/lib/amd6
     PATH=/usr/local/cuda/bin:/usr/local/mapd-deps/bin:/build/mapd-core/build/bin:${PATH}
 
 RUN cd /build && \
-    git clone https://github.com/shusson/mapd-core.git && \
+    git clone https://github.com/mapd/mapd-core.git && \
     cd mapd-core && \
-    git checkout 604126d && \
+    git checkout 036112c && \
     mkdir -p /build/mapd-core/build && \
     cd /build/mapd-core/build && \
     cmake -DCMAKE_BUILD_TYPE=debug -DCUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so .. && \
