@@ -15,6 +15,15 @@ services:
     entrypoint: ["mapd_server", "--http-port", "9090", "-p", "9091", "--data", "/data/mapd-data-00", "--read-only", "--db-query-list", "/data/warm-up.sql"]
     volumes:
       - ./data:/data
+  healthcheck:
+    image: shusson/mapd-healthcheck:1.0
+    restart: always
+    entrypoint: ["/go/bin/app"]
+    command: ["-u", "http://mapd-00:9090"]
+    ports:
+      - 8000:8000
+    depends_on:
+      - mapd-00
   immerse:
     image: ${MAPD_IMAGE}
     restart: always

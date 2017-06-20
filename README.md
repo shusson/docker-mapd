@@ -50,7 +50,7 @@ docker-compose up -d
 We use [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) and [nvidia-docker-compose](https://github.com/eywalker/nvidia-docker-compose) to run
 Docker containers with NVIDIA GPUs
 
-Ensure all dependencies have been installed on host see [aws/init.sh](aws/init.sh) for example on ubuntu 16.04
+Ensure all dependencies have been installed on host see [ubuntu-16.04/init.sh](aws/init.sh) for example on ubuntu 16.04
 
 Test nvidia-docker
 ```bash
