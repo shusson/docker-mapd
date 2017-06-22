@@ -15,16 +15,13 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-sudo apt-get install -y docker-ce
+sudo apt-get update && apt-get install -y docker-ce
 sudo docker run hello-world
-sudo usermod -aG docker ubuntu && systemctl enable docker
+# sudo usermod -aG docker ubuntu && systemctl enable docker
 
 curl -L -O https://github.com/docker/compose/releases/download/1.14.0-rc2/docker-compose-`uname -s`-`uname -m`
 sudo mv docker-compose-`uname -s`-`uname -m` /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-
-# install nvidia docker compose
-pip install nvidia-docker-compose
 
 # install nvidia drivers
 sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
@@ -34,5 +31,8 @@ sudo apt-get update && sudo apt-get install -y --no-install-recommends linux-hea
 # install nvidia-docker and nvidia-docker-plugin
 wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
 sudo dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
+
+# install nvidia docker compose
+pip install nvidia-docker-compose
 
 echo "reboot to finish installation"
