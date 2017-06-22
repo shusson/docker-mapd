@@ -33,6 +33,14 @@ vi .env
 cp .env data/.env
 ```
 
+Edit the fragment size in [data/create.sql](data/create.sq).
+A good start is:
+
+    (# Rows in db)/(# CPUs OR # GPUs)
+
+e.g for a cpu deployment of 40m rows, on a node that has 4 cpus fragment size
+is ~ 10m
+
 #### CPU-only
 Load data (optional)
 ```bash
