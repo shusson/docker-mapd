@@ -58,7 +58,16 @@ docker-compose up -d
 We use [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) and [nvidia-docker-compose](https://github.com/eywalker/nvidia-docker-compose) to run
 Docker containers with NVIDIA GPUs
 
-Ensure all dependencies have been installed on host see [ubuntu-16.04/init.sh](aws/init.sh) for example on ubuntu 16.04
+Ensure all dependencies have been installed on host see [ubuntu-16.04/init.sh](aws/init.sh) for example on ubuntu 16.04.
+
+NOTE: it is recommended that you freeze the kernel after installing the nvidia driver.
+Everytime the linux kernal is updated you will have to reinstall the nvidia drivers.
+
+e.g
+```bash
+sudo apt-mark hold linux-image-4.4.0-1013-aws
+sudo apt-mark hold linux-base
+```
 
 Test nvidia-docker
 ```bash

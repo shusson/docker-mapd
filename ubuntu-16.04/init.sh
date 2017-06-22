@@ -1,4 +1,3 @@
-sudo apt-get update
 sudo apt-get install -y \
       apt-transport-https \
       ca-certificates \
@@ -35,4 +34,5 @@ sudo dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
 # install nvidia docker compose
 pip install nvidia-docker-compose
 
+echo "Warning! if the kernal is updated, you will have to reinstall the nvidia drivers"
 echo "reboot to finish installation"
