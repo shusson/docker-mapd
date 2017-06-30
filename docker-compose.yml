@@ -16,7 +16,7 @@ services:
     volumes:
       - ./data:/data
   mapd-api:
-    image: shusson/mapd-api:1.0
+    image: shusson/mapd-api:1.1
     restart: always
     entrypoint: ["/go/bin/app"]
     command: ["-url", "http://mapd-00:9090"]
