@@ -109,8 +109,8 @@ ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/jvm/default-java/jre/lib/amd6
 RUN cd /build && \
     git clone https://github.com/mapd/mapd-core.git && \
     cd mapd-core && \
-    git checkout 036112c && \
+    git checkout 2966fac && \
     mkdir -p /build/mapd-core/build && \
     cd /build/mapd-core/build && \
-    cmake -DCMAKE_BUILD_TYPE=debug -DENABLE_CUDA=off .. && \
+    cmake -DCMAKE_BUILD_TYPE=debug -DENABLE_CUDA=off -DMAPD_IMMERSE_DOWNLOAD=off .. && \
     make -j $(nproc)
