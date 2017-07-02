@@ -16,12 +16,6 @@ docker build . -t fred/mapd-cpu
 cd ../cuda
 docker build . -t fred/mapd-cuda
 ```
-or use one of the pushed images that already exist which are tagged by the
-mapd-core hash.
-```bash
-docker pull shusson/mapd-cuda:036112c
-docker pull shusson/mapd-cpu:036112c
-```
 
 ### Usage
 We use the `.env` file to set which image(CPU or GPU build) to use.
