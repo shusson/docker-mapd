@@ -24,7 +24,8 @@ Copy and edit `.env`
 ```bash
 cp .env-example .env
 vi .env
-cp .env data/.env
+cp data/.env-example data/.env
+vi data/.env-example
 ```
 
 Edit the fragment size in [data/create.sql](data/create.sq).
