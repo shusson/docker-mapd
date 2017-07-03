@@ -3,3 +3,5 @@ data/mapd-data*
 data/*.tsv*
 
 .env
+
+.DS_Store
