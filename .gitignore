@@ -1,7 +1,7 @@
 data/mapd-data*
 
 data/*.tsv*
-
+cache
 .env
 
 .DS_Store
