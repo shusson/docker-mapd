@@ -16,7 +16,7 @@ services:
     depends_on:
       - mapd-core
   cache:
-    image: shusson/lru-cache:1.0
+    image: shusson/lru-cache:1.1
     restart: always
     volumes:
       - ./cache:/data
