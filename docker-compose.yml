@@ -15,11 +15,14 @@ services:
     entrypoint: ["mapd_server", "--http-port", "9090", "-p", "9091", "--data", "/data/mapd-data-00", "--read-only", "--db-query-list", "/data/warm-up.sql"]
     volumes:
       - ./data:/data
+    ports:
+      - 9090:9090
   mapd-api:
+    network_mode: "host"
     image: shusson/mapd-api:1.3.0
     restart: always
     entrypoint: ["/go/bin/app"]
-    command: ["-url", "http://mapd-00:9090", "-redisURL", "http://52.65.56.162:6379"]
+    command: ["-url", "http://localhost:9090", "-redisURL", "52.65.56.162:6379"]
     depends_on:
       - mapd-00
   # immerse:
