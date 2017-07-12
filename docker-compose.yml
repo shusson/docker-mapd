@@ -7,10 +7,10 @@ services:
     volumes:
       - ./data:/data
   mapd-api:
-    image: shusson/mapd-api:1.3.0
+    image: shusson/mapd-api:1.3.2
     restart: always
     entrypoint: ["/go/bin/app"]
-    command: ["-url", "http://mapd-core:9090", "-redisURL", "cache:6379"]
+    command: ["-url", "http://mapd-core:9090", "-redis", "cache:6379"]
     ports:
       - 80:4000
     depends_on:
