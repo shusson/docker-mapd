@@ -14,7 +14,7 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
-sudo apt-get update && apt-get install -y docker-ce
+sudo apt-get update && sudo apt-get install -y docker-ce
 sudo docker run hello-world
 # sudo usermod -aG docker ubuntu && systemctl enable docker
 
