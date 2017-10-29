@@ -20,4 +20,4 @@ CREATE TABLE mgrb (
   gene TEXT ENCODING DICT(32),
   clinvar TEXT ENCODING DICT(32)
 )  WITH (FRAGMENT_SIZE=5000000);
-COPY mgrb FROM '/data/mgrb.tsv' WITH (delimiter='\t');
+COPY mgrb FROM '/data/mgrb_mapd.tsv' WITH (delimiter='\t');
